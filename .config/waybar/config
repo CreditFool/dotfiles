@@ -1,0 +1,106 @@
+{
+	"layer": "top",
+	"margin-bottom": 0,
+	"margin-top": 0,
+	"modules-left": ["clock", "cpu", "memory", "tray"],
+	"modules-center": ["hyprland/workspaces"],
+	// "modules-right": ["backlight","pulseaudio","clock", "battery", "custom/power"],
+	"modules-right": ["network", "backlight","pulseaudio", "custom/power"],
+	
+	"pulseaudio": {
+		"tooltip": false,
+		"scroll-step": 5,
+		"format": "{icon} {volume}%",
+		"format-muted": " mute",
+		"on-click":"pactl set-sink-mute @DEFAULT_SINK@ toggle",
+		"format-icons": {
+      "headphone": "",
+			"default": ["", "", ""]
+		}
+	},
+
+	"network": {
+		// "interface": "wlp2*", // (Optional) To force the use of this interface
+		"format-wifi": "  {essid}",
+		"format-ethernet": "",
+		"tooltip-format": "{essid} ({signalStrength}%)",
+		"format-linked": "{ifname} (No IP) ",
+		"format-disconnected": "⚠",
+		"format-alt": "{ifname}: {ipaddr}/{cidr}"
+	},
+
+	"backlight": {
+		"tooltip": false,
+		"format": " {}%",
+		"interval":1,
+		"on-scroll-up": "brightnessctl set 1%+",
+		"on-scroll-down": "brightnessctl set 1%-"
+	},
+
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 20
+    },
+    "format": "{icon}  {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt": "{time} {icon}",
+    "format-icons": ["", "", "", "", ""]
+  },
+
+	"tray":{
+	  "icon-size":18,
+		"spacing": 10
+	},
+  
+  "clock": {
+    "format": " {:%H:%M:%S   %d %h (%a)}",
+		"format-alt": " {:%I:%M %p   %d %h (%a)}",
+    "interval": 1
+  },
+
+  "cpu": {
+    "interval": 5,
+    "format": " {usage: 02}%",
+    "max-length": 10
+  },
+
+  "memory": {
+    "interval": 5,
+    "format": "  {}%",
+    "max-length": 10
+  },
+
+  "custom/launcher":{
+    "format": " ",
+    "on-click": "wofi --show drun",
+    "on-click-right": "killall wofi"
+  },
+
+  "custom/power":{
+    "format": " ",
+    "on-click": "bash /home/creditfool/.config/rofi/bin/powermenu",
+		"tooltip": false,
+  },
+
+    // The code following below is given in the great documentation for Waybar status bar under Useful Utilities in Hyprland wiki
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+	  "on-click": "activate",
+    "format-icons": {
+      "urgent": "",
+      "active": "",
+      "default": "〇"
+    },
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+    },
+	  "on-scroll-up": "hyprctl dispatch workspace e-1",
+	  "on-scroll-down": "hyprctl dispatch workspace e+1"
+	}
+}
