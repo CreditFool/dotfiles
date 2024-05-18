@@ -2,10 +2,10 @@
 	"layer": "top",
 	"margin-bottom": 0,
 	"margin-top": 0,
-	"modules-left": ["clock", "cpu", "memory", "tray"],
-	"modules-center": ["hyprland/workspaces"],
+	"modules-left": ["hyprland/workspaces", "cpu", "memory", "tray"],
+	"modules-center": ["mpris", "cava"],
 	// "modules-right": ["backlight","pulseaudio","clock", "battery", "custom/power"],
-	"modules-right": ["network", "backlight","pulseaudio", "custom/power"],
+	"modules-right": ["clock", "backlight","pulseaudio", "network", "custom/power"],
 	
 	"pulseaudio": {
 		"tooltip": false,
@@ -21,12 +21,14 @@
 
 	"network": {
 		// "interface": "wlp2*", // (Optional) To force the use of this interface
-		"format-wifi": "  {essid}",
+		"format-wifi": "  online",
 		"format-ethernet": "",
-		"tooltip-format": "{essid} ({signalStrength}%)",
+		//"tooltip-format": "{essid} ({signalStrength}%)",
+		"tooltip-format": "{ifname}: {ipaddr}/{cidr})",
 		"format-linked": "{ifname} (No IP) ",
-		"format-disconnected": "⚠",
-		"format-alt": "{ifname}: {ipaddr}/{cidr}"
+		"format-disconnected": "⚠ offline",
+		//"format-alt": "{ifname}: {ipaddr}/{cidr}"
+		"format-alt": "  {essid} ({signalStrength}%)"
 	},
 
 	"backlight": {
@@ -56,8 +58,8 @@
 	},
   
   "clock": {
-    "format": " {:%H:%M:%S   %d %h (%a)}",
-		"format-alt": " {:%I:%M %p   %d %h (%a)}",
+    "format": " {:%H:%M:%S}",
+		"format-alt": " {:%d %h (%a)}",
     "interval": 1
   },
 
@@ -102,5 +104,17 @@
     },
 	  "on-scroll-up": "hyprctl dispatch workspace e-1",
 	  "on-scroll-down": "hyprctl dispatch workspace e+1"
-	}
+	},
+  
+  "mpris": {
+    "dynamic-order": ["title"],
+    "title-len": 40,
+    "format": "{status_icon} {dynamic}",
+    "tooltip-format": "by: {artist} ({position}/{length})",
+    "status-icons": {
+      "playing": "[▶]",
+		  "paused": " ⏸ ",
+	  },
+    "interval": 1,
+  }
 }
