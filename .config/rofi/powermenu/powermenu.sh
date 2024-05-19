@@ -84,6 +84,8 @@ case $chosen in
 			i3lock
 		elif [[ -f /usr/bin/betterlockscreen ]]; then
 			betterlockscreen -l
+    elif [[ -f /usr/local/bin/hyprlock ]]; then
+			hyprlock
 		fi
         ;;
     $suspend)
